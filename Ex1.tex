@@ -1,0 +1,64 @@
+\documentclass[DIN, pagenumber=false, fontsize=11pt, parskip=half]{scrartcl}
+
+\usepackage{ngerman}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\setlength{\parindent}{0em}
+
+% set section in CM
+\setkomafont{section}{\normalfont\bfseries\Large}
+
+\newcommand{\mytitle}[1]{{\noindent\Large\textbf{#1}}}
+\newcommand{\mysection}[1]{\textbf{\section*{#1}}}
+\newcommand{\mysubsection}[2]{\romannumeral #1) #2}
+
+
+%===================================
+\begin{document}
+
+\noindent\textbf{Numerical Approximation of PDEs by Finite Differences and Finite Volumes} \hfill \textbf{Universität Hamburg}\\
+SoSe 2023 \hfill Yahya Saleh\\
+
+\mytitle{Exercise sheet 1 \hfill \today}
+
+
+%===================================
+\mysection{Exercise 1}
+Consider the following finite difference approximations
+\begin{enumerate}
+    \item First order forward difference approximation of the first derivative
+    of $u$
+    \begin{equation}
+        \label{eq:o1_d1_forward}
+        D_1 u(x) = \frac{u(x+\Delta x) - u(x)}{\Delta x}
+    \end{equation} 
+    \item Second order central difference for second order derivative of $u$
+     \begin{equation*}
+        D_2 u(x) = \frac{u(x+\Delta x) - 2 u(x) + u(x-\Delta x)}{\Delta x^2}
+     \end{equation*}
+    \item Second order central difference for multi-variate function 
+\end{enumerate}
+Analyze the order of accuracy of the above approximation schemes. Compare the
+accuracy of \eqref{eq:o1_d1_forward} with the center difference scheme (?? in
+lecture notes). 
+
+%===================================
+\mysection{Exercise 2}
+Find the coefficients of some scheme. 
+%===================================
+\mysection{Exercize 3}
+Implement numerically. Compare again real derivative computed via known formula
+and computed via automatic differentiation. 
+
+Hint to SimPy.
+\mysection{Exercize 4}
+Solve a differential equation. 
+
+
+\end{document}
