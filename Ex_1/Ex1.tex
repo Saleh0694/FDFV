@@ -25,40 +25,54 @@
 \noindent\textbf{Numerical Approximation of PDEs by Finite Differences and Finite Volumes} \hfill \textbf{Universität Hamburg}\\
 SoSe 2023 \hfill Yahya Saleh\\
 
-\mytitle{Exercise sheet 1 \hfill \today}
+\mytitle{Exercise sheet 1 \hfill 19. April 2023}
 
 
 %===================================
 \mysection{Exercise 1}
-Consider the following finite difference approximations
+Let $u: \mathbb{R} \supset [x_{\text{min}}, x_{\text{max}}] \to \mathbb{R}$ be a smooth function. For a fixed $\Delta x >0$ consider the following finite-difference approximations of various derivatives of $u$
 \begin{enumerate}
-    \item First order forward difference approximation of the first derivative
+    \item Forward difference approximation of the first derivative
     of $u$
     \begin{equation}
         \label{eq:o1_d1_forward}
-        D_1 u(x) = \frac{u(x+\Delta x) - u(x)}{\Delta x}
+        D_1 u(x) = \frac{u(x+\Delta x) - u(x)}{\Delta x}.
     \end{equation} 
-    \item Second order central difference for second order derivative of $u$
+    \item Central difference approximation of the second derivative of $u$
      \begin{equation*}
-        D_2 u(x) = \frac{u(x+\Delta x) - 2 u(x) + u(x-\Delta x)}{\Delta x^2}
+        D_2 u(x) = \frac{-\frac{1}{12}u(x-2\Delta x)+\frac{4}{3}u(x-\Delta x) - \frac{5}{2} u(x) + \frac{4}{3}u(x+\Delta x) -\frac{1}{12}u(x+2\Delta x)}{\Delta x^2}.
      \end{equation*}
-    \item Second order central difference for multi-variate function 
 \end{enumerate}
-Analyze the order of accuracy of the above approximation schemes. Compare the
-accuracy of \eqref{eq:o1_d1_forward} with the center difference scheme (?? in
+Determine the order of accuracy (in the sense of definition 1.1 from the lecture notes) of the above approximations. Compare the order of
+accuracy of \eqref{eq:o1_d1_forward} with that of the center difference scheme (example 1.2 in
 lecture notes). 
-
-%===================================
 \mysection{Exercise 2}
-Find the coefficients of some scheme. 
-%===================================
-\mysection{Exercize 3}
-Implement numerically. Compare again real derivative computed via known formula
-and computed via automatic differentiation. 
+Under the settings of exercise 1 consider the following finite-difference approximation of the third derivative of $u$
+\begin{equation*}
+	D_3 u(x) = \frac{1}{\Delta x^3} (a_1 u(x-2 \Delta x) + a_2 u(x-\Delta x) + a_3 u(x+\Delta x) + a_4 u(x+2\Delta x))
+\end{equation*}
+with the coefficients $a_1, a_2, a_3, a_4 \in \mathbb{R}$. Determine the values of these coefficients for the approximation to have a second-order accuracy.
+\mysection{Exercise 3}
+Write a code to compute the numerical derivatives $D_1, D_2, D_3$ above of the function $u:[-\pi, \pi] \to \mathbb{R}$ given by
+\begin{equation*}
+	u(x) = \sin(10x) \cos(5x) \exp(-x^2) x^5.
+\end{equation*}
+Analyze the convergence of the approximate derivatives as $\Delta x \to 0$ by plotting, on a logarithmic scale, the root-mean-squared error of the approximations as a function of $\Delta x$. 
+\mysection{Exercise 4}
+Write a program to solve one of the two following problems.
+\begin{enumerate}
+	\item Consider the linear advection equation with periodic boundary conditions introduced in section 1.1 in the lecture notes
+	\begin{align*}
+		\partial_t u(t,x) + \partial_x u(t,x) &= 0 \qquad \text{ in } (0,T) \times [-1,1] \\
+		u(0,x) & = \sin(\pi x) \qquad \text{for } x \in [-1,1].
+	\end{align*}
+Solve this equation using a second-order accurate central difference method to approximate the derivative in space and a third-order accurate Runge-Kuta method with uniform time step size to numerically integrate in time. Plot the root mean squared error of the approximation as a function of $\Delta x$ for different time steps.
+\item Consider the infinite-dimensional eigenvalue problem 
+\begin{equation*}
+	-\frac{1}{2} u_i''(x) + \frac{1}{2} x^2 u_i(x)  = E_i u_i(x) 
+\end{equation*}
+on the domain of interest $[-5,5]$. Solve this equation, i.e., find approximate eigenpairs $(u_i, E_i)$, using a fourth-order accurate central difference approximation of $u_i''$. Make a table with the absolute error in the smallest 5 eigenvalues and $L^2$ errors in the computation of their corresponding eigenvectors for several values of $\Delta x$. 
 
-Hint to SimPy.
-\mysection{Exercize 4}
-Solve a differential equation. 
-
-
+\textbf{Hint}: Use a finite difference formula to approximate the operator $\frac{d}{dx^2}$ and compute the approximated operator on a grid. Use your favorite eigensolver to diagonalize the resulting matrix. For computing the errors, note that the exact eigenvalues are given by $E_i = 1/2 + n, n=0,1,2,\dots $ and the exact eigenfunctions are the so-called Hermite functions. Normalize the approximate eigenfunctions in $L^2$ before comparison with the exact solutions. 
+\end{enumerate}
 \end{document}
