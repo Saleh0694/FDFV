@@ -1,0 +1,73 @@
+\documentclass[DIN, pagenumber=false, fontsize=11pt, parskip=half]{scrartcl}
+
+\usepackage{ngerman}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\setlength{\parindent}{0em}
+
+% set section in CM
+\setkomafont{section}{\normalfont\bfseries\Large}
+
+\newcommand{\mytitle}[1]{{\noindent\Large\textbf{#1}}}
+\newcommand{\mysection}[1]{\textbf{\section*{#1}}}
+\newcommand{\mysubsection}[2]{\romannumeral #1) #2}
+
+
+%===================================
+\begin{document}
+
+\noindent\textbf{Numerical Approximation of PDEs by Finite Differences and Finite Volumes} \hfill \textbf{Universität Hamburg}\\
+SoSe 2023 \hfill Yahya Saleh\\
+
+\mytitle{Exercise sheet 2 \hfill 05. May 2023}
+
+%===================================
+\mysection{Exercise 1}
+Consider the ODE 
+\begin{align*}
+	\frac{d}{dt}x(t) &= \lambda x(t) \\
+	x(t_0) &= x_0,
+\end{align*}
+for some $\lambda \in \mathbb{C}$.
+Set $t_n = t_0 + n \Delta t$ for some $\Delta t > 0, n = 1, 2, \dots.$. Consider the following methods to propagate from $t_n$ to $t_{n+1}$:
+\begin{itemize}
+	\item Euler method: $$x_{n+1} = x_n + \Delta t \lambda x_n$$ \\
+	\item Implicit Euler method:
+	$$
+	x_{n+1} = x_n + \Delta t  \lambda x_{n+1}
+	$$
+\end{itemize}
+Determine the regions of stability for both methods. Assume that $\lambda$ lies in the left half-plane, i.e., it has a negative real part. Under what conditions on $\Delta t$ is the implicit Euler method stable? Assume that $\lambda$ is purely imaginary, i.e., it has a zero real part. Is Euler's method a good choice for solving the Cauchy problem defined above?
+\mysection{Exercise 2}
+Consider a $p$-th order accurate summation by part operator given by a grid $\underline{x}$, a first derivative operator $D$ and a mass matrix $M$.  
+\begin{itemize}
+	\item Assume that $M$ is diagonal and show that $\underline{1}^T M \underline{x}^{2q} = \frac{1}{2q+1} (x_{\text{max}}^{2q+1} - x^{2q+1}_{\text{min}})$ for $q\in \{1, \dots, p-1\}$.
+
+	\textbf{Remark:} This shows that $M$ induces a quadrature rule that integrates monomials of even degrees $\leq 2p-1$ exactly. It, hence, completes the proof of theorem 1.15 in the lecture notes.
+	
+	\item Assuming that $M$ is not necessary diagonal, show that $\underline{1}^T M$ still yields a quadrature rule that is at least $(p-1)$-th order accurate.
+\end{itemize}
+
+\mysection{Exercise 3}
+Consider the problem
+	\begin{align*}
+		\partial_t u(t,x) + a \partial_x u(t,x) &= 0 \qquad \text{ in } (0,T) \times [0,2] \\
+		u(0,x) & = \sin(\pi x) \qquad \text{for } x \in [-1,1] \\
+		u(t,0) & = -\sin(\pi t) \qquad \text{for } x \in [-1,1] \\
+	\end{align*}
+for some $a=1/2$. 
+Solve this equation using the SBP operator from example 1.10 and a third or fourth order Runge-Kuta method. Conduct convergence studies where you consider as a metric the $L^2$ error, i.e.,
+$$
+\|u - u_{\text{approximate}}\|_{L^2} = \biggl(\int_0 ^2 \bigl(u(x) - u_{\text{approximate}}(x)\bigr)^2 \ dx\biggr)^{1/2}.
+ $$
+ In the convergence studies differentiate between the transient region $\text{TR} = \{x \in [0,2] \ | \ x>at\}$ and the asymptotic region $\text{AR} = [0,2] \setminus \text{TR}$. Repeat the convergence study for different values of $a>0$ and a higher-order SBP operator. 
+ 
+ \textbf{Hint:} To compute the error remember that the mass matrix $M$ induces a quadrature rule. You can impose the boundary condition either weakly or strongly. An example of a weak imposition is given in the lecture notes.
+ 
+\end{document}
