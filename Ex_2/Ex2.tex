@@ -59,7 +59,7 @@ Consider the problem
 	\begin{align*}
 		\partial_t u(t,x) + a \partial_x u(t,x) &= 0 \qquad \text{ in } (0,T) \times [0,2] \\
 		u(0,x) & = \sin(\pi x) \qquad \text{for } x \in [-1,1] \\
-		u(t,0) & = -\sin(\pi t) \qquad \text{for } x \in [-1,1] \\
+		u(t,0) & = -\sin(\pi t) \qquad \text{for } t \in [0,T] \\
 	\end{align*}
 for some $a=1/2$. 
 Solve this equation using the SBP operator from example 1.10 and a third or fourth order Runge-Kuta method. Conduct convergence studies where you consider as a metric the $L^2$ error, i.e.,
@@ -69,5 +69,15 @@ $$
  In the convergence studies differentiate between the transient region $\text{TR} = \{x \in [0,2] \ | \ x>at\}$ and the asymptotic region $\text{AR} = [0,2] \setminus \text{TR}$. Repeat the convergence study for different values of $a>0$ and a higher-order SBP operator. 
  
  \textbf{Hint:} To compute the error remember that the mass matrix $M$ induces a quadrature rule. You can impose the boundary condition either weakly or strongly. An example of a weak imposition is given in the lecture notes.
- 
+\mysection{Exercise 4}
+Consider the system of equations
+\begin{align*}
+	\partial_t u(t,x) +  \partial_x v(t,x) &= 0 \qquad \text{ in } (0,T) \times (0,1) \\
+	\partial_t v(t,x) -  \partial_x u(t,x) &= 0 \qquad \text{ in } (0,T) \times (0,1) \\
+	u(0,x) & = \sin(2\pi x) \qquad \text{for } x \in [0,1] \\
+	v(0,x) & = -\sin(2\pi x) \qquad \text{for } x \in [0,1] \\
+	u(t,1) & = v(t,0) \qquad \text{for } t \in [0,T] \\
+	v(t,1) & = u(t,1) \qquad \text{for } t \in [0,T] \\
+	\end{align*}
+ Obtain an energy estimate for this problem. Solve the problem using an SBP discretization in space and a third- or fourth-order Runge-Kuta method. Impose the boundary conditions weakly.
 \end{document}
